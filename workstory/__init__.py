@@ -23,6 +23,9 @@ def create_app(test_config=None):
     from . import db
     db.init_app(app)
 
+    from . import task
+    app.register_blueprint(task.bp)
+    
     @app.route('/hello')
     def hello():
         db.get_db()

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .task_set_status_form {
+                display: inline-block;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>My Tasks</h1>
+        <form action="{{ url_for('task.create') }}" method="post">
+            <input type="hidden" name="id" value="{{ new_task_id }}">
+            <input type="text" name="content" style="width:50em">
+            <button type="submit">Create</button>
+        </form>
+
+        <h2>In Progressing</h2>
+        <ul>
+        {% for task in in_progressing_tasks %}
+            <li>
+                {{ task['created_at'] }} - {{ task['content'] }}
+                <form action="{{ url_for('task.set_status', id=task['id']) }}" method="post" class="task_set_status_form">
+                    <input type="hidden" name="status" value="COMPLETE">
+                    <button type="submit">Complete</button>
+                </form>
+                <form action="{{ url_for('task.set_status', id=task['id']) }}" method="post" class="task_set_status_form">
+                    <input type="hidden" name="status" value="CANCEL">
+                    <button type="submit">Cancel</button>
+                </form>
+
+            </li>
+        {% else %}
+            No task
+        {% endfor %}
+        </ul>
+
+        <h2>To Do</h2>
+        <ul>
+        {% for task in todo_tasks %}
+            <li>
+                {{ task['created_at'] }} - {{ task['content'] }}
+                <form action="{{ url_for('task.set_status', id=task['id']) }}" method="post" class="task_set_status_form">
+                    <input type="hidden" name="status" value="IN_PROGRESSING">
+                    <button type="submit">In Progressing</button>
+                </form>
+                <form action="{{ url_for('task.set_status', id=task['id']) }}" method="post" class="task_set_status_form">
+                    <input type="hidden" name="status" value="CANCEL">
+                    <button type="submit">Cancel</button>
+                </form>
+            </li>
+        {% else %}
+            No task
+        {% endfor %}
+        </ul>
+
+        <h2>Completed</h2>
+        <ul>
+        {% for task in completed_tasks %}
+            <li>
+                {{ task['created_at'] }} - {{ task['content'] }}
+                <form action="{{ url_for('task.set_status', id=task['id']) }}" method="post" class="task_set_status_form">
+                    <input type="hidden" name="status" value="IN_PROGRESSING">
+                    <button type="submit">In Progressing</button>
+                </form>
+            </li>
+        {% else %}
+            No task
+        {% endfor %}
+        </ul>
+
+        <h2>Cancel</h2>
+        <ul>
+        {% for task in canceled_tasks %}
+            <li>
+                {{ task['created_at'] }} - {{ task['content'] }}
+                <form action="{{ url_for('task.set_status', id=task['id']) }}" method="post" class="task_set_status_form">
+                    <input type="hidden" name="status" value="IN_PROGRESSING">
+                    <button type="submit">In Progressing</button>
+                </form>
+            </li>
+        {% else %}
+            No task
+        {% endfor %}
+        </ul>
+    </body>
+</html>
