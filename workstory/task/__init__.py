@@ -22,7 +22,7 @@ def translate_for_view(task):
 
 @bp.route('/', methods=('GET',))
 def home():
-    from . import db
+    from workstory import db
     conn = db.get_db()
     cur = conn.cursor()
     cur.execute('SELECT id, content, created_at, status FROM task')
@@ -48,7 +48,7 @@ def home():
 
 @bp.route('/create', methods=('POST',))
 def create():
-    from . import db
+    from workstory import db
     
     id = request.form['id']
     content = request.form['content']
@@ -63,7 +63,7 @@ def create():
 
 @bp.route('/<id>/set_status', methods=('POST', ))
 def set_status(id):
-    from . import db
+    from workstory import db
     
     status = request.form['status']
 

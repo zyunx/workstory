@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .task_set_status_form {
+                display: inline-block;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Don't Waste Time!</h1>
+
+        <h2>Today is {{ today }}</h2>
+        <ul>
+        {% for work in work_items %}
+            <li>
+                {{ work[1] }} - {{ work[2] }}
+            </li>
+        {% else %}
+            What are you doing today?
+        {% endfor %}
+        </ul>
+
+        <h2>In Progressing</h2>
+        <ul>
+        {% for task in in_progressing_tasks %}
+            <li>
+                {{ task['created_at'] }} - {{ task['content'] }}
+            </li>
+        {% else %}
+            No task
+        {% endfor %}
+        </ul>
+    
+        <p>
+            <a href="{{ url_for('task.home') }}">My Tasks</a>
+        </p>
+
+    </body>
+</html>

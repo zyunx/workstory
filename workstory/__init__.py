@@ -25,7 +25,10 @@ def create_app(test_config=None):
 
     from . import task
     app.register_blueprint(task.bp)
-    
+
+    from . import today
+    app.register_blueprint(today.bp)
+
     @app.route('/hello')
     def hello():
         db.get_db()
