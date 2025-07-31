@@ -2,7 +2,7 @@
 <html>
     <head>
         <style>
-            .task_set_status_form {
+            .inline-block {
                 display: inline-block;
             }
         </style>
@@ -14,7 +14,7 @@
         <ul>
         {% for work in work_items %}
             <li>
-                {{ work[1] }} - {{ work[2] }}
+                {{ work['work_date'] }} - {{ work['task_content'] }}
             </li>
         {% else %}
             What are you doing today?
@@ -26,6 +26,10 @@
         {% for task in in_progressing_tasks %}
             <li>
                 {{ task['created_at'] }} - {{ task['content'] }}
+                <form action="{{ url_for('today.add_work') }}" method="POST" class="inline-block">
+                    <input type="hidden" name="task_id" value="{{ task['id'] }}">
+                    <button type="submit">Work on it</button>
+                </form>
             </li>
         {% else %}
             No task

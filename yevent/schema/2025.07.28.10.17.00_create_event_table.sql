@@ -1,0 +1,7 @@
+CREATE TABLE event (
+    sn BIGSERIAL PRIMARY KEY,
+    id VARCHAR(36) UNIQUE NOT NULL,
+    event_type VARCHAR(50) NOT NULL,
+    event_content JSONB NOT NULL,
+    happen_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
