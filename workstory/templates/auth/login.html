@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login - Workstory</title>
+        <style>
+            #login-form {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            #login-form label {
+                width: 5em;
+            }
+            #login-form input {
+                flex-grow: 1;
+            }
+
+            #login-button {
+                margin-left: 1em;
+            }
+
+            #error {
+                margin-top: 1em;
+                font-size: 1.5em;
+                text-align: center;
+                color: brown;
+
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style="text-align:center;margin-top:2em">Work Story</h1>
+        <h2 style="text-align:center;margin-top:2em">Login</h2>
+        <form id="login-form" method="post" style="margin:auto; width:50%">
+            <label for="input-password">Password</label>
+            <input id="input-password" type="password" name="password"/>
+            <button id="login-button" type="submit">Login</button>
+        </form>
+        <div id="error">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <span>{{ message }}</span>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+    </body>
+</html>
