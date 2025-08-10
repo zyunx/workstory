@@ -21,7 +21,7 @@ def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
         if not g.is_login:
-            return redirect(url_for('auth.login'))
+            return redirect(url_for('auth.login', next=request.path))
 
         return view(**kwargs)
 
@@ -36,7 +36,8 @@ def login():
             flash('Invalid password.', 'error')
         else:
             do_login()
-            return redirect(url_for('auth.login_success'))
+            next = request.args.get('next', url_for('auth.login_success'))
+            return redirect(next)
     
     return render_template('auth/login.html')
 
