@@ -56,7 +56,7 @@ def add_work():
     conn = db.get_db()
 
     task_id = request.form['task_id']
-    work_date = date.today()
+    work_date = date.today().isoformat()
     
     event_id = str(uuid.uuid4())
     event_type, event_content = work_event.add_work(task_id, work_date)

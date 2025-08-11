@@ -29,6 +29,9 @@ def create_app(test_config=None):
     from . import today
     app.register_blueprint(today.bp)
 
+    from . import work
+    app.register_blueprint(work.bp)
+
     @app.route('/hello')
     def hello():
         db.get_db()
