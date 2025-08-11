@@ -1,24 +1,39 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Tasks - Workstory</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
         <style>
+            #create-task-form {
+                display: flex;
+                align-items: center;
+            }
+            #create-task-form input {
+                flex-grow: 1;
+            }
+            #create-task-form button {
+                margin-left: 1em;
+            }
+
             .task_set_status_form {
                 display: inline-block;
             }
         </style>
     </head>
     <body>
-        <h1>My Tasks</h1>
+    <div class="container">
+        <h1>Work Story</h1>
+        <h2>Tasks</h2>
         <p>
             <a href="{{ url_for('today.home') }}">Today's Work</a>
         </p>
-        <form action="{{ url_for('task.create') }}" method="post">
+        <form id="create-task-form" action="{{ url_for('task.create') }}" method="post">
             <input type="hidden" name="id" value="{{ new_task_id }}">
-            <input type="text" name="content" style="width:50em">
+            <input type="text" name="content">
             <button type="submit">Create</button>
         </form>
 
-        <h2>In Progressing</h2>
+        <h3>In Progressing</h3>
         <ul>
         {% for task in in_progressing_tasks %}
             <li>
@@ -38,7 +53,7 @@
         {% endfor %}
         </ul>
 
-        <h2>To Do</h2>
+        <h3>To Do</h3>
         <ul>
         {% for task in todo_tasks %}
             <li>
@@ -57,7 +72,7 @@
         {% endfor %}
         </ul>
 
-        <h2>Completed</h2>
+        <h3>Completed</h3>
         <ul>
         {% for task in completed_tasks %}
             <li>
@@ -72,7 +87,7 @@
         {% endfor %}
         </ul>
 
-        <h2>Cancel</h2>
+        <h3>Cancel</h3>
         <ul>
         {% for task in canceled_tasks %}
             <li>
@@ -86,5 +101,6 @@
             No task
         {% endfor %}
         </ul>
+    </div>
     </body>
 </html>

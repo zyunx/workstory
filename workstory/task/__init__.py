@@ -11,6 +11,7 @@ TASK_STATUS_COMPLETE = 'COMPLETE'
 TASK_STATUS_IN_PROGRESSING = 'IN_PROGRESSING'
 TASK_STATUS_CANCEL = 'CANCEL'
 
+from workstory.auth import login_required
 
 def translate_for_view(task):
     return {
@@ -21,6 +22,7 @@ def translate_for_view(task):
     }
 
 @bp.route('/', methods=('GET',))
+@login_required
 def home():
     from workstory import db
     conn = db.get_db()
